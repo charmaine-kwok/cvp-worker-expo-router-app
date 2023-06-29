@@ -1,12 +1,12 @@
-import { Tabs } from "expo-router";
-import { FontAwesome } from "@expo/vector-icons/";
-import { MaterialIcons, Ionicons, AntDesign } from "@expo/vector-icons";
-import { useTranslation } from "react-i18next";
-import { useAtomValue } from "jotai";
+import { Tabs } from 'expo-router';
+import { FontAwesome } from '@expo/vector-icons/';
+import { MaterialIcons, Ionicons, AntDesign } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
+import { useAtomValue } from 'jotai';
 
-import { usernameAtom } from "~atoms/username";
-import { DarkThemeAtom } from "~atoms/darkTheme";
-import TabBarIcon from "~components/tabBarIcon/tabBarIcon";
+import { usernameAtom } from '~atoms/username';
+import { DarkThemeAtom } from '~atoms/darkTheme';
+import TabBarIcon from '~components/tabBarIcon/tabBarIcon';
 
 export default function Layout1() {
   const usernameData = useAtomValue(usernameAtom);
@@ -17,24 +17,24 @@ export default function Layout1() {
     <Tabs
       screenOptions={{
         tabBarShowLabel: false,
-        tabBarActiveTintColor: isDarkTheme ? "white" : "black",
+        tabBarActiveTintColor: isDarkTheme ? 'white' : 'black',
         unmountOnBlur: true,
         tabBarStyle: {
-          backgroundColor: isDarkTheme ? "black" : "white",
+          backgroundColor: isDarkTheme ? 'black' : 'white',
         },
         headerStyle: {
-          backgroundColor: isDarkTheme ? "#000" : "#fff",
+          backgroundColor: isDarkTheme ? '#000' : '#fff',
         },
-        headerTintColor: isDarkTheme ? "#fff" : "#000",
+        headerTintColor: isDarkTheme ? '#fff' : '#000',
       }}
     >
       <Tabs.Screen
-        name="cert"
+        name='cert'
         options={{
-          href: usernameData !== "admin" ? "home/" : null,
+          href: usernameData !== 'admin' ? 'home/' : null,
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon focused={focused}>
-              <FontAwesome name="home" size={focused ? 28 : 24} color={color} />
+              <FontAwesome name='home' size={focused ? 28 : 24} color={color} />
             </TabBarIcon>
           ),
           headerShown: false,
@@ -42,24 +42,24 @@ export default function Layout1() {
       />
 
       <Tabs.Screen
-        name="BarCodeScanner"
+        name='BarCodeScanner'
         options={{
-          href: usernameData === "admin" ? "home/BarCodeScanner" : null,
+          href: usernameData === 'admin' ? 'home/BarCodeScanner' : null,
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon focused={focused}>
               <MaterialIcons
-                name="qr-code-scanner"
+                name='qr-code-scanner'
                 size={focused ? 28 : 24}
                 color={color}
               />
             </TabBarIcon>
           ),
-          headerTitle: `${t("QRCodeScanner")}`,
+          headerTitle: `${t('QRCodeScanner')}`,
         }}
       />
 
       <Tabs.Screen
-        name="Add"
+        name='Add'
         options={{
           href: null,
           // usernameData === "user" || usernameData === "W000001" ? "home/Add"
@@ -67,42 +67,29 @@ export default function Layout1() {
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon focused={focused}>
               <AntDesign
-                name="addfile"
+                name='addfile'
                 size={focused ? 28 : 24}
                 color={color}
               />
             </TabBarIcon>
           ),
-          headerTitle: "Add",
+          headerTitle: 'Add',
         }}
       />
 
       <Tabs.Screen
-        name="settings"
+        name='settings'
         options={{
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon focused={focused}>
               <Ionicons
-                name="settings-sharp"
+                name='settings-sharp'
                 size={focused ? 28 : 24}
                 color={color}
               />
             </TabBarIcon>
           ),
           headerShown: false,
-        }}
-      />
-
-      <Tabs.Screen
-        name="Profile"
-        options={{
-          href: usernameData !== "admin" ? "home/Profile" : null,
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon focused={focused}>
-              <FontAwesome name="user" size={focused ? 28 : 24} color={color} />
-            </TabBarIcon>
-          ),
-          headerTitle: `${t("Profile")}`,
         }}
       />
     </Tabs>
