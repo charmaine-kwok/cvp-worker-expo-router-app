@@ -12,12 +12,8 @@ import { BarCodeScanner } from "expo-barcode-scanner";
 import BarcodeMask from "react-native-barcode-mask";
 import { useAtomValue } from "jotai";
 
-import {
-  validateScannedCert,
-  validateScannerUser,
-} from "~functions/helper/ajv";
+import { validateScannedCert } from "~functions/helper/ajv";
 import getTime from "~functions/getTime";
-import getWorkerDetails from "~functions/api/worker/getWorkerDetails";
 import getCertDetails from "~functions/api/cert/getCertDetails";
 import { accessTokenAtom } from "~atoms/accessToken";
 
@@ -82,29 +78,6 @@ export default function BarCodeScan() {
             Alert.alert(
               `${t("ScannedResult")}`,
               `UUID: ${data.UUID}\n Credential Type: ${data.credential_type}\n Start Date: ${data.start_date}\n End Date: ${data.end_date}\n Is Valid: ${data.is_valid}\n Issuer: ${data.issuer}`,
-              [{ text: "OK", onPress: () => console.log("OK Pressed") }]
-            );
-          }
-        } catch (e) {
-          console.log("error:", e);
-        }
-      };
-      fetchData();
-      console.log("scanned", data);
-    } else if (validateScannerUser(parsedData)) {
-      const timeStamp = parsedData.timeStamp as number;
-      if (currentTime - timeStamp > 60000) {
-        Alert.alert("Error", "The QR Code has expired", [
-          { text: "OK", onPress: () => console.log("OK Pressed") },
-        ]);
-      }
-      const fetchData = async () => {
-        try {
-          const data = await getWorkerDetails(parsedData.username, accessToken);
-          if (data) {
-            Alert.alert(
-              `${t("ScannedResult")}`,
-              `ID: ${data.id}\n Name: ${data.name}\n Gender: ${data.gender}\n HKID: ${data.hkid}`,
               [{ text: "OK", onPress: () => console.log("OK Pressed") }]
             );
           }
