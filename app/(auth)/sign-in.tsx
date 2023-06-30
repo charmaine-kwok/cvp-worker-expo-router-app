@@ -55,7 +55,7 @@ export default function SignIn() {
         if (username === 'admin') {
           router.replace('/home/BarCodeScanner');
         } else {
-          router.replace('/home/cert');
+          router.replace('/home/credential');
         }
       })
       .catch((error) => {
@@ -70,19 +70,19 @@ export default function SignIn() {
     <>
       <Stack.Screen options={{ headerShown: false }} />
       <DismissKeyboard>
-        <View className='items-center bg-[#d3d3d3] flex-1 '>
+        <View className="items-center bg-[#d3d3d3] flex-1 ">
           <Image
             className={`w-[250px] sm:w-[300px] h-[25%] mt-[15%] sm:mt-[20%] mb-[5%]`}
-            resizeMode='contain'
+            resizeMode="contain"
             source={require('../../assets/icon/icons8.png')}
           ></Image>
-          <Text className='text-2xl mb-4'>{`${t('Hello')}`}</Text>
-          <Text className='mb-2'>{`${t('WelcomeText')}`}</Text>
+          <Text className="text-2xl mb-4">{`${t('Hello')}`}</Text>
+          <Text className="mb-2">{`${t('WelcomeText')}`}</Text>
           <CustomInput
             placeholder={`${t('UsernamePlaceholder')}`}
             setValue={setUsername}
             value={username}
-            icon={<FontAwesome name='user' size={24} color='darkgrey' />}
+            icon={<FontAwesome name="user" size={24} color="darkgrey" />}
             // rules={{ required: "Username is required" }}
           />
 
@@ -90,26 +90,26 @@ export default function SignIn() {
             placeholder={`${t('PasswordPlaceholder')}`}
             setValue={setPassword}
             value={password}
-            icon={<Entypo name='lock' size={24} color='darkgrey' />}
+            icon={<Entypo name="lock" size={24} color="darkgrey" />}
             password={true}
             // rules={{ required: "Username is required" }}
           />
 
           <CustomButton
             addStyle={{ width: '70%', flexDirection: 'column' }}
-            widthPerct='80%'
+            widthPerct="80%"
             text={`${t('SignIn')}`}
             onPress={() => loginHandler(username, password)}
-            bgColor='black'
-            fgColor='white'
-            flexDir='column'
+            bgColor="black"
+            fgColor="white"
+            flexDir="column"
           />
 
-          <Text className='text-black my-2 sm:my-6'>{`${t(
+          <Text className="text-black my-2 sm:my-6">{`${t(
             'ForgotPassword'
           )}`}</Text>
 
-          <Text className='text-black my-2 sm:my-4'>{`${t('SignUp')}`}</Text>
+          <Text className="text-black my-2 sm:my-4">{`${t('SignUp')}`}</Text>
           <LanguagePicker />
         </View>
       </DismissKeyboard>
