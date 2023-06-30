@@ -1,5 +1,5 @@
-import CertListPage from "./CertListPage";
+import CrendentialListPage from "./CredentialListPage";
 
 export default function index() {
-  return <CertListPage />;
+  return <CrendentialListPage />;
 }
