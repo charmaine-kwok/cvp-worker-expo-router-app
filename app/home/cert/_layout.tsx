@@ -26,7 +26,7 @@ export default function Layout() {
       <Stack.Screen name="CredentialListPage" />
       <Stack.Screen
         name="[UUID]"
-        options={{ headerTitle: `${t("CertInfo")}` }}
+        options={{ headerTitle: `${t("Credential Info")}` }}
       />
     </Stack>
   );
