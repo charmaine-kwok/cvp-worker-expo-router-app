@@ -14,7 +14,7 @@ export default function Entry() {
       href={
         isLoggedIn
           ? username !== "admin"
-            ? "/home/cert"
+            ? "/home/credential"
             : "/home/BarCodeScanner"
           : "/(auth)/sign-in"
       }

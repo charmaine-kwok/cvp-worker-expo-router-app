@@ -29,7 +29,7 @@ export default function Layout1() {
       }}
     >
       <Tabs.Screen
-        name="cert"
+        name="credential"
         options={{
           href: usernameData !== "admin" ? "home/" : null,
           tabBarIcon: ({ color, focused }) => (
