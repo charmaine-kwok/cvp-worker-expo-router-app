@@ -3,7 +3,7 @@ import { Dispatch } from "react";
 
 const getAccessToken: (
   setIsLoggedInAtom: Dispatch<boolean>,
-  setAccessToken: Dispatch<string>
+  setAccessToken: Dispatch<string>,
 ) => void = async (setIsLoggedIn, setAccessToken) => {
   const accessToken = await AsyncStorage.getItem("accessToken");
   if (accessToken !== null) {

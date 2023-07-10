@@ -78,7 +78,7 @@ export default function BarCodeScan() {
             Alert.alert(
               `${t("ScannedResult")}`,
               `UUID: ${data.UUID}\n Credential Type: ${data.credential_type}\n Start Date: ${data.start_date}\n End Date: ${data.end_date}\n Is Valid: ${data.is_valid}\n Issuer: ${data.issuer}`,
-              [{ text: "OK", onPress: () => console.log("OK Pressed") }]
+              [{ text: "OK", onPress: () => console.log("OK Pressed") }],
             );
           }
         } catch (e) {

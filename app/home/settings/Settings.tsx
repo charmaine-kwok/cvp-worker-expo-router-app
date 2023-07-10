@@ -71,7 +71,7 @@ export default function Settings() {
         ListFooterComponent={
           <View className="opacity-60 justify-between flex-row border-b-2 py-4 mx-2 border-slate-300 ">
             <Text textColor className={`ml-4 text-${fontSizeData + 1}xl`}>{`${t(
-              "Build"
+              "Build",
             )}`}</Text>
             <Text textColor className={`mr-4 text-${fontSizeData + 1}xl `}>
               v 1.0.0

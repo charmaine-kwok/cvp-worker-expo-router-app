@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const loginHandler: (username: string, password: string) => void = (
   username,
-  password
+  password,
 ) => {
   fetch("http://localhost:8080/login", {
     method: "POST",
@@ -28,7 +28,7 @@ const loginHandler: (username: string, password: string) => void = (
       console.error(error);
       Alert.alert(
         "Login failed",
-        "Please check your username and password and try again."
+        "Please check your username and password and try again.",
       );
     });
 };

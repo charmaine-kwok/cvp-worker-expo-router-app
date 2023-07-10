@@ -3,7 +3,7 @@ import { Dispatch } from "react";
 
 const getIsDarkMode: (
   setIsDarkTheme: Dispatch<boolean>,
-  setTheme: Dispatch<boolean>
+  setTheme: Dispatch<boolean>,
 ) => void = async (setIsDarkTheme, setTheme) => {
   const isDarkMode = await AsyncStorage.getItem("isDarkMode");
   if (isDarkMode !== null) {

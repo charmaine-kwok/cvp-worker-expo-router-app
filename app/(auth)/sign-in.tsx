@@ -28,7 +28,7 @@ export default function SignIn() {
 
   const loginHandler: (username: string, password: string) => void = (
     username,
-    password
+    password,
   ) => {
     fetch("http://192.168.1.12:8081/auth/", {
       method: "POST",
@@ -62,7 +62,7 @@ export default function SignIn() {
         console.error(error);
         Alert.alert(
           "Login failed",
-          "Please check your username and password and try again."
+          "Please check your username and password and try again.",
         );
       });
   };
@@ -105,7 +105,7 @@ export default function SignIn() {
           />
 
           <Text className="text-black my-2 sm:my-6">{`${t(
-            "ForgotPassword"
+            "ForgotPassword",
           )}`}</Text>
 
           <Text className="text-black my-2 sm:my-4">{`${t("SignUp")}`}</Text>

@@ -17,5 +17,5 @@ const ScannedCertFieldSchema = {
 type ScannedCertField = JTDDataType<typeof ScannedCertFieldSchema>;
 
 export const validateScannedCert = ajv.compile<ScannedCertField>(
-  ScannedCertFieldSchema
+  ScannedCertFieldSchema,
 );

@@ -11,7 +11,7 @@ export interface CertDetailsFields {
 
 const getCertDetails = async (
   UUID: string,
-  accessToken: string
+  accessToken: string,
 ): Promise<CertDetailsFields> => {
   // Retrieving cert details from API server
   const response = await fetch(`http://192.168.1.12:8081/api/certs/${UUID}`, {

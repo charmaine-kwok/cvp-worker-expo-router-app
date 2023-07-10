@@ -10,7 +10,7 @@ const clock = new ntpClient(options);
 
 const getTime = (
   setTimestamp?: Dispatch<React.SetStateAction<number>>,
-  setDateFormat?: Dispatch<React.SetStateAction<string>>
+  setDateFormat?: Dispatch<React.SetStateAction<string>>,
 ) => {
   // get the current unix timestamp
   const currentTime = clock.getTime();
@@ -27,7 +27,7 @@ const getTime = (
 
 export const toDate = (
   unixTimestamp: number,
-  setDateFormat?: Dispatch<React.SetStateAction<string>>
+  setDateFormat?: Dispatch<React.SetStateAction<string>>,
 ) => {
   const dateObject = new Date(unixTimestamp);
   console.log(dateObject.toLocaleString("en-GB", { hour12: false }));

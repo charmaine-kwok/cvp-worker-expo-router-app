@@ -10,7 +10,7 @@ export type itemProps = {
 const getCertList = async (
   username: string,
   page: number,
-  pageSize: number
+  pageSize: number,
 ): Promise<{
   current_page: number;
   items: string[];
@@ -30,7 +30,7 @@ const getCertList = async (
         "Content-Type": "application/json",
         Authorization: accessToken,
       },
-    }
+    },
   );
 
   // data is an array of string, i.e. array of cert ids
