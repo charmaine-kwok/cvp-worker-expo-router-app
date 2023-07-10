@@ -86,7 +86,7 @@ export default function Settings() {
             <Text textColor className={`ml-4 text-${fontSizeData + 1}xl`}>
               {item.name}
             </Text>
-            <View className="mr-4">
+            <View className="mr-4 flex justify-center">
               <AntDesign
                 name="right"
                 size={24}

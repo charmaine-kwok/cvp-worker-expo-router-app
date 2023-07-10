@@ -1,13 +1,15 @@
 import React from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Pressable } from "react-native";
+import { Text } from "react-native-ui-lib";
 
 type CustomButtonProps = {
   onPress: () => void;
   text: string;
   bgColor: string;
-  fgColor: string;
+  fgColor?: string;
   children?: React.ReactNode;
   widthPerct?: string;
+  bold?: boolean;
   addStyle?: {};
   icon?: React.ReactElement;
   flexDir?: "column" | "column-reverse" | "row" | "row-reverse";
@@ -19,6 +21,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   bgColor,
   fgColor,
   widthPerct,
+  bold = true,
   addStyle,
   icon,
   flexDir = "row",
@@ -36,7 +39,12 @@ const CustomButton: React.FC<CustomButtonProps> = ({
     >
       {icon && <View className="mr-4">{icon}</View>}
 
-      <Text className="grow text-white mx-1.5 font-bold">{text}</Text>
+      <Text
+        style={[fgColor ? { color: fgColor } : {}]}
+        className={`grow text-white mx-1.5  ${bold ? "font-bold" : ""}`}
+      >
+        {text}
+      </Text>
     </Pressable>
   );
 };
