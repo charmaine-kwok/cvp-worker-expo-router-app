@@ -1,28 +1,16 @@
-import { View, Text, GridList } from "react-native-ui-lib";
-import {
-  ExpiredCrendentials,
-  expiredCredentialsAtom,
-} from "~atoms/expiredCredentials";
-import { useAtomValue, useAtom } from "jotai";
-import { ReactElement, JSXElementConstructor } from "react";
-import { ListRenderItemInfo, FlatList } from "react-native";
+import { View, Text } from "react-native-ui-lib";
+import { expiredCredentialsAtom } from "~atoms/expiredCredentials";
+import { useAtomValue } from "jotai";
+import { FlatList } from "react-native";
 
 const ExpiredCredentialsList: React.FC = () => {
-  const [expiredCredentialsData, setExpiredCredentialsData] = useAtom(
-    expiredCredentialsAtom,
-  );
+  const expiredCredentialsData = useAtomValue(expiredCredentialsAtom);
   console.log(expiredCredentialsData);
 
   return (
     <View>
-      {/* {expiredCredentialsData.map((item) => (
-        <View key={item.UUID}>
-          <Text>{item.UUID}</Text>
-          <Text>{item.issuer}</Text>
-          <Text>{item.credentialType}</Text>
-        </View>
-      ))} */}
       <FlatList
+        className="h-full"
         data={expiredCredentialsData}
         renderItem={({ item }) => (
           <View key={item.UUID}>
