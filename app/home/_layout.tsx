@@ -59,14 +59,6 @@ export default function Layout1() {
       />
 
       <Tabs.Screen
-        name="ExpiredCredentials"
-        options={{
-          href: null,
-          headerTitle: `${t("Expired Credentials")}`,
-        }}
-      />
-
-      <Tabs.Screen
         name="settings"
         options={{
           tabBarIcon: ({ color, focused }) => (

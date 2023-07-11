@@ -28,6 +28,13 @@ export default function Layout() {
         name="[UUID]"
         options={{ headerTitle: `${t("Credential Info")}` }}
       />
+      <Stack.Screen
+        name="ExpiredCredentials"
+        options={{
+          // href: null,
+          headerTitle: `${t("Expired Credentials")}`,
+        }}
+      />
     </Stack>
   );
 }
