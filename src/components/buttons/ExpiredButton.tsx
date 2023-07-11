@@ -19,7 +19,7 @@ const ExpiredButton: React.FC = () => {
         bold={false}
         bgColor={isDarkTheme ? "#ffffff" : "#000000"}
         onPress={() => {
-          router.push("/home/ExpiredCredentials");
+          router.push("/home/credential/ExpiredCredentials");
         }}
       ></CustomButton>
     </View>
