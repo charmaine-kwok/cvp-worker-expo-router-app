@@ -9,12 +9,9 @@ import { useAtomValue } from "jotai";
 import { useState } from "react";
 
 import FontSizeModal from "~components/modal/FontSizeModal";
-import { DarkThemeAtom } from "~atoms/darkTheme";
 import { fontSizeAtom } from "~atoms/fontSize";
 
 export default function Settings() {
-  const isDarkTheme = useAtomValue(DarkThemeAtom);
-
   const [isVisible, setIsVisible] = useState(false);
 
   const { t } = useTranslation();
@@ -35,9 +32,6 @@ export default function Settings() {
     },
     {
       name: `${t("FontSize")}`,
-      // onPress: () => {
-      //   router.push("/home/settings/fontSize");
-      // },
       onPress: () => {
         setIsVisible(true);
       },
@@ -87,11 +81,9 @@ export default function Settings() {
               {item.name}
             </Text>
             <View className="mr-4 flex justify-center">
-              <AntDesign
-                name="right"
-                size={24}
-                color={isDarkTheme ? "white" : "black"}
-              />
+              <Text textColor>
+                <AntDesign name="right" size={24} />
+              </Text>
             </View>
           </Pressable>
         )}
