@@ -5,17 +5,14 @@ import { useAtomValue } from "jotai";
 
 import getTime from "~functions/getTime";
 import { DarkThemeAtom } from "~atoms/darkTheme";
+import { selectedCredentialsAtom } from "~atoms/selectedCredentials";
 
-type QrCodeProps = {
-  size: number;
-  value: { username: string } | { UUID: string };
-};
-
-export const QrCode: React.FC<QrCodeProps> = ({ size, value }) => {
+export const QrCode: React.FC = () => {
   const [timeStamp, setTimestamp] = useState<number>(null);
   const [dateFormat, setDateFormat] = useState<string>("");
 
   const isDarkTheme = useAtomValue(DarkThemeAtom);
+  const selectedCredentials = useAtomValue(selectedCredentialsAtom);
 
   useEffect(() => {
     getTime(setTimestamp, setDateFormat);
@@ -24,19 +21,19 @@ export const QrCode: React.FC<QrCodeProps> = ({ size, value }) => {
     }, 60000); // Refresh every 60 seconds
     return () => clearInterval(interval);
   }, []);
-  console.log(value);
+
   let icon = require("../../../assets/icon/icons8.png");
   return (
-    <View className="my-4">
+    <View className="mb-4">
       <QRCode
         backgroundColor={isDarkTheme ? "black" : "white"}
         color={isDarkTheme ? "white" : "black"}
-        size={size}
+        size={250}
         logoBackgroundColor={isDarkTheme ? "black" : "white"}
         logoSize={50}
         logo={icon}
         value={JSON.stringify({
-          ...value,
+          selectedCredentials: selectedCredentials,
           timeStamp: timeStamp,
           date: dateFormat,
         })}
