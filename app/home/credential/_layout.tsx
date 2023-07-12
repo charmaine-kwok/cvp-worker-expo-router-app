@@ -25,10 +25,6 @@ export default function Layout() {
       />
       <Stack.Screen name="CredentialListPage" />
       <Stack.Screen
-        name="[UUID]"
-        options={{ headerTitle: `${t("Credential Info")}` }}
-      />
-      <Stack.Screen
         name="ExpiredCredentials"
         options={{
           // href: null,
