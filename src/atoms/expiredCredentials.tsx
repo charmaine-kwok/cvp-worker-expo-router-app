@@ -1,8 +1,6 @@
 import { atom } from "jotai";
 import { itemProps } from "~functions/api/credential/getCredentialList";
 
-export type ExpiredCrendentials = {
-  expiredCrendentials: itemProps[];
-};
+const expiredCredentialsAtom = atom<itemProps[]>([]);
 
-export const expiredCredentialsAtom = atom<itemProps[]>([]);
+export default expiredCredentialsAtom;
