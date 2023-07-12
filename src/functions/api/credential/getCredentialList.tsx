@@ -5,6 +5,8 @@ export type itemProps = {
   isValid: boolean;
   credentialType: string;
   issuer: string;
+  start_date: string;
+  end_date: string;
 };
 
 const getCredentialList = async (
