@@ -1,5 +1,5 @@
 import { View, Text } from "react-native-ui-lib";
-import { expiredCredentialsAtom } from "~atoms/expiredCredentials";
+import expiredCredentialsAtom from "~atoms/expiredCredentials";
 import { useAtomValue } from "jotai";
 import { FlatList } from "react-native";
 
