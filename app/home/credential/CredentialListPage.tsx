@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "expo-router";
 import { View } from "react-native-ui-lib";
-import { useAtomValue, useAtom, useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import expiredCredentialsAtom from "~atoms/expiredCredentials";
