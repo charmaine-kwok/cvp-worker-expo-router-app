@@ -1,11 +1,14 @@
 import { View, Text } from "react-native-ui-lib";
-import expiredCredentialsAtom from "~atoms/expiredCredentials";
 import { useAtomValue } from "jotai";
 import { FlatList } from "react-native";
+
+import expiredCredentialsAtom from "~atoms/expiredCredentials";
+import { fontSizeAtom } from "~atoms/fontSize";
 
 const ExpiredCredentialsList: React.FC = () => {
   const expiredCredentialsData = useAtomValue(expiredCredentialsAtom);
   console.log(expiredCredentialsData);
+  const fontSizeData = useAtomValue(fontSizeAtom);
 
   return (
     <View>
@@ -15,7 +18,7 @@ const ExpiredCredentialsList: React.FC = () => {
         renderItem={({ item }) => (
           <View key={item.UUID}>
             <View className="py-2 px-4">
-              <Text textColor>
+              <Text textColor className={`text-${fontSizeData + 1}xl`}>
                 {item.UUID}
                 {"\n"}
                 {item.issuer} {"\n"}

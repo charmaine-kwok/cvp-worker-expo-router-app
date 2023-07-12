@@ -90,7 +90,7 @@ const CrendentialList: React.FC<CrendentialListProps> = ({
           customTitle={([issuer, _]: [string, any]) => (
             <View className="">
               <Text
-                className={`text-${fontSizeData + 2}xl  py-4 pl-2  text-black`}
+                className={`text-${fontSizeData + 1}xl  py-4 pl-2  text-black`}
               >
                 {issuer}
               </Text>
