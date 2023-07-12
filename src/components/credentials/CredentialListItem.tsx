@@ -24,7 +24,7 @@ const CredentialListItem: React.FC<CredentialListItemProps> = ({ item }) => {
     <View className="flex flex-row border-t items-center relative py-6 px-2">
       <Checkbox
         label=""
-        checked={checked}
+        checked={selectedCredentials.includes(item.UUID)}
         onChange={() => {
           setChecked(!checked);
           if (selectedCredentials.includes(item.UUID)) {
