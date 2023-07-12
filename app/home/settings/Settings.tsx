@@ -42,10 +42,10 @@ export default function Settings() {
         router.push("/home/settings/theme");
       },
     },
-    {
-      name: `${t("AboutCIC")}`,
-      onPress: _handlePressButtonAsync,
-    },
+    // {
+    //   name: `${t("AboutCIC")}`,
+    //   onPress: _handlePressButtonAsync,
+    // },
     {
       name: `${t("SignOut")}`,
 
