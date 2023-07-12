@@ -1,11 +1,9 @@
-import { Text, TouchableOpacity, View } from "react-native-ui-lib";
-import { useRouter } from "expo-router";
-import { useAtomValue } from "jotai";
-import { AntDesign } from "@expo/vector-icons";
+import { Text, View } from "react-native-ui-lib";
+import { useAtomValue, useAtom } from "jotai";
 import { useState } from "react";
 import Checkbox from "react-native-modest-checkbox";
-import { useAtom } from "jotai";
 
+import MoreInfo from "./MoreInfo";
 import { selectedCredentialsAtom } from "~atoms/selectedCredentials";
 import { fontSizeAtom } from "~atoms/fontSize";
 import { itemProps } from "~functions/api/credential/getCredentialList";
@@ -19,10 +17,8 @@ const CredentialListItem: React.FC<CredentialListItemProps> = ({ item }) => {
   const [selectedCredentials, setSelectedCredentials] = useAtom(
     selectedCredentialsAtom,
   );
-
   const [checked, setChecked] = useState(false);
-
-  const router = useRouter();
+  const [isHintVisible, setIsHintVisible] = useState(false);
 
   return (
     <View className="flex flex-row border-t items-center relative py-6 px-2">
@@ -49,15 +45,12 @@ const CredentialListItem: React.FC<CredentialListItemProps> = ({ item }) => {
       <View className="absolute right-0 bottom-0">
         <Text className="opacity-20 text-black">{item.UUID}</Text>
       </View>
-      <TouchableOpacity
-        onPress={() => {
-          // TODO:
-          router.push("/home/credential/");
-        }}
-        className=" absolute top-0 right-0 py-4 px-2"
-      >
-        <AntDesign name="infocirlceo" size={15} />
-      </TouchableOpacity>
+      <MoreInfo
+        isHintVisible={isHintVisible}
+        setIsHintVisible={setIsHintVisible}
+        start_date={item.start_date.split("T")[0]}
+        end_date={item.end_date.split("T")[0]}
+      />
     </View>
   );
 };
