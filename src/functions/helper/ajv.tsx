@@ -6,11 +6,16 @@ const ajv = new Ajv({ allErrors: true });
 const ScannedCertFieldSchema = {
   type: "object",
   properties: {
-    UUID: { type: "string" },
+    selectedCredentials: {
+      type: "array",
+      items: {
+        type: "string",
+      },
+    },
     date: { type: "string" },
     timeStamp: { type: "integer" },
   },
-  required: ["UUID", "date", "timeStamp"],
+  required: ["selectedCredentials", "date", "timeStamp"],
   additionalProperties: false,
 } as const;
 
