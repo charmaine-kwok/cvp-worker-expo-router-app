@@ -8,7 +8,7 @@ type CustomButtonProps = {
   bgColor: string;
   fgColor?: string;
   children?: React.ReactNode;
-  widthPerct?: string;
+  widthPerct?: number;
   bold?: boolean;
   addStyle?: {};
   icon?: React.ReactElement;

@@ -15,7 +15,7 @@ const GenerateQRCodeButton: React.FC<{ setIsVisible: any }> = ({
         text={`${t("Generate QR code")}`}
         flexDir="column"
         fgColor="#ffffff"
-        widthPerct="100%"
+        widthPerct={100}
         bold={true}
         bgColor="#2696dccf"
       />

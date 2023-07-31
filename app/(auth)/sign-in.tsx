@@ -97,7 +97,7 @@ export default function SignIn() {
 
           <CustomButton
             addStyle={{ width: "70%", flexDirection: "column" }}
-            widthPerct="80%"
+            widthPerct={80}
             text={`${t("SignIn")}`}
             onPress={() => loginHandler(username, password)}
             bgColor="black"
