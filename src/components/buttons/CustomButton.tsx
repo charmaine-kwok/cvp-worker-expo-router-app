@@ -29,7 +29,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   return (
     <Pressable
       onPress={onPress}
-      className="w-[60%] items-center my-2 p-2.5 md:p-4 rounded-md"
+      className="my-2 flex w-[60%] items-center justify-center rounded-md p-2.5 md:p-4"
       style={[
         bgColor ? { backgroundColor: bgColor } : {},
         widthPerct ? { width: widthPerct } : {},
@@ -41,7 +41,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 
       <Text
         style={[fgColor ? { color: fgColor } : {}]}
-        className={`grow text-white mx-1.5  ${bold ? "font-bold" : ""}`}
+        className={`mx-1.5 grow text-white  ${bold ? "font-bold" : ""}`}
       >
         {text}
       </Text>

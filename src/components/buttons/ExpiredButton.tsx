@@ -13,12 +13,11 @@ const ExpiredButton: React.FC = () => {
   const isDarkTheme = useAtomValue(DarkThemeAtom);
 
   return (
-    <View className="absolute bottom-0 w-full mb-4 flex items-center px-4">
+    <View className="absolute bottom-0 mb-4 flex w-full items-center px-4">
       <CustomButton
         text={t("Expired Credentials")}
         flexDir="column"
         fgColor={isDarkTheme ? "#000000" : "#ffffff"}
-        widthPerct="100%"
         bold={false}
         bgColor={isDarkTheme ? "#ffffff" : "#000000"}
         onPress={() => {
