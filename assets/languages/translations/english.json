@@ -35,6 +35,17 @@
     "Result": "Result",
     "Results": "Results",
     "No": "No",
-    "Close": "Close"
+    "Close": "Close",
+    "Search": "Search",
+    "Issuers": "Issuer",
+    "Issuer": "Issuer",
+    "Issuer1": "Issuer1",
+    "Issuer2": "Issuer2",
+    "Credential Type": "Credential Type",
+    "type1": "type1",
+    "type2": "type2",
+    "type3": "type3",
+    "Start date": "Start date",
+    "End date": "End date"
   }
 }
