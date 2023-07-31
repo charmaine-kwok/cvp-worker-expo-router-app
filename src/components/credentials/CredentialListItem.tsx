@@ -1,6 +1,7 @@
 import { Text, View } from "react-native-ui-lib";
 import { useAtomValue } from "jotai";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import MoreInfo from "./MoreInfo";
 import { fontSizeAtom } from "~atoms/fontSize";
@@ -11,14 +12,16 @@ type CredentialListItemProps = {
 };
 
 const CredentialListItem: React.FC<CredentialListItemProps> = ({ item }) => {
+  const { t } = useTranslation();
+
   const fontSizeData = useAtomValue(fontSizeAtom);
   const [isHintVisible, setIsHintVisible] = useState(false);
 
   return (
     <View className="relative flex flex-row items-center border-t px-2 py-6">
-      <Text
-        className={`text-${fontSizeData}xl text-black`}
-      >{`Credential Type: ${item.credentialType} `}</Text>
+      <Text className={`text-${fontSizeData}xl text-black`}>{`${t(
+        "Credential Type",
+      )}: ${t(`${item.credentialType}`)} `}</Text>
       <View className="absolute bottom-0 right-0">
         <Text className="text-black opacity-20">{item.UUID}</Text>
       </View>

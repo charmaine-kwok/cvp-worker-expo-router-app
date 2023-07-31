@@ -3,9 +3,9 @@ import { AntDesign } from "@expo/vector-icons";
 import { Text, View, Button } from "react-native-ui-lib";
 import { SafeAreaView, Platform, UIManager } from "react-native";
 import { AccordionList } from "react-native-accordion-list-view";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
-import QRCodeModal from "~components/modal/QRCodeModal";
 import { DarkThemeAtom } from "~atoms/darkTheme";
 import CredentialListItem from "./CredentialListItem";
 import { itemProps } from "~functions/api/credential/getCredentialList";
@@ -30,9 +30,9 @@ const CrendentialList: React.FC<CrendentialListProps> = ({
   // loadMoreData,
   credentials,
 }) => {
-  const fontSizeData = useAtomValue(fontSizeAtom);
+  const { t } = useTranslation();
 
-  const [isVisible, setIsVisible] = useState(false);
+  const fontSizeData = useAtomValue(fontSizeAtom);
 
   useEffect(() => {
     if (Platform.OS === "android") {
@@ -71,7 +71,6 @@ const CrendentialList: React.FC<CrendentialListProps> = ({
 
   return (
     <SafeAreaView className="h-[80%]">
-      <QRCodeModal isVisible={isVisible} setIsVisible={setIsVisible} />
       <View
         style={{
           paddingVertical: "2%",
@@ -88,7 +87,7 @@ const CrendentialList: React.FC<CrendentialListProps> = ({
               <Text
                 className={`text-${fontSizeData + 1}xl  py-4 pl-2  text-black`}
               >
-                {issuer}
+                {t(`${issuer}`)}
               </Text>
             </View>
           )}

@@ -1,6 +1,7 @@
 import { TouchableOpacity, Hint } from "react-native-ui-lib";
 import { Dispatch } from "react";
 import { AntDesign } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 
 type MoreInfoProps = {
   isHintVisible: boolean;
@@ -15,12 +16,16 @@ const MoreInfo: React.FC<MoreInfoProps> = ({
   start_date,
   end_date,
 }) => {
+  const { t } = useTranslation();
+
   return (
-    <TouchableOpacity className="absolute top-0 right-0 py-4 px-2">
+    <TouchableOpacity className="absolute right-0 top-0 px-2 py-4">
       <Hint
         visible={isHintVisible}
-        message={`Start date: ${start_date}\nEnd date: ${end_date}`}
-        color={"#000000"}
+        message={`${t("Start date")}: ${start_date}\n${t(
+          "End date",
+        )}: ${end_date}`}
+        color={"#ffffff"}
         onBackgroundPress={() => setIsHintVisible(false)}
       >
         <TouchableOpacity onPress={() => setIsHintVisible(!isHintVisible)}>
