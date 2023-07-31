@@ -14,7 +14,7 @@ import { useAtomValue } from "jotai";
 
 import { validateScannedCert } from "~functions/helper/ajv";
 import getTime from "~functions/getTime";
-import getCertDetails from "~functions/api/cert/getCertDetails";
+import getCertDetails from "~functions/api/credential/getCredentialDetails";
 import { accessTokenAtom } from "~atoms/accessToken";
 
 const { width } = Dimensions.get("window");
