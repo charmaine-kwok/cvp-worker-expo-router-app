@@ -40,7 +40,18 @@ export default function Layout1() {
           headerShown: false,
         }}
       />
-
+      <Tabs.Screen
+        name="ChooseCred"
+        options={{
+          href: usernameData === "admin" ? "home/ChooseCred" : null,
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon focused={focused}>
+              <FontAwesome name="list" size={focused ? 28 : 24} color={color} />
+            </TabBarIcon>
+          ),
+          headerTitle: `${t("Select Required Credentials")}`,
+        }}
+      />
       <Tabs.Screen
         name="BarCodeScanner"
         options={{
