@@ -53,7 +53,7 @@ export default function SignIn() {
         // redirect to MainScreen
 
         if (username === "admin") {
-          router.replace("/home/BarCodeScanner");
+          router.replace("/home/ChooseCred");
         } else {
           router.replace("/home/credential");
         }
