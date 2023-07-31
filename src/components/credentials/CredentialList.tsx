@@ -6,11 +6,8 @@ import { AccordionList } from "react-native-accordion-list-view";
 import { useEffect, useState } from "react";
 
 import QRCodeModal from "~components/modal/QRCodeModal";
-import GenerateQRCodeButton from "~components/buttons/GenerateQRCodeButton";
-import { selectedCredentialsAtom } from "~atoms/selectedCredentials";
 import { DarkThemeAtom } from "~atoms/darkTheme";
 import CredentialListItem from "./CredentialListItem";
-// import NumberOfSelectedResults from "~components/numberOfResults/NumberOfSelectedResults";
 import { itemProps } from "~functions/api/credential/getCredentialList";
 import { fontSizeAtom } from "~atoms/fontSize";
 
@@ -34,7 +31,6 @@ const CrendentialList: React.FC<CrendentialListProps> = ({
   credentials,
 }) => {
   const fontSizeData = useAtomValue(fontSizeAtom);
-  const selectedCredentials = useAtomValue(selectedCredentialsAtom);
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -107,9 +103,6 @@ const CrendentialList: React.FC<CrendentialListProps> = ({
           expandMultiple={true}
         />
       </View>
-      {selectedCredentials.length > 0 && (
-        <GenerateQRCodeButton setIsVisible={() => setIsVisible(true)} />
-      )}
     </SafeAreaView>
   );
 };
