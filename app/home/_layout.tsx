@@ -44,7 +44,7 @@ export default function Layout1() {
       <Tabs.Screen
         name="BarCodeScanner"
         options={{
-          href: usernameData === "admin" ? "home/BarCodeScanner" : null,
+          href: "home/BarCodeScanner",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon focused={focused}>
               <MaterialIcons
