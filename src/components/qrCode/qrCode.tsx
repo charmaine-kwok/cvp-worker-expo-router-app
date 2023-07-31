@@ -7,7 +7,9 @@ import getTime from "~functions/getTime";
 import { DarkThemeAtom } from "~atoms/darkTheme";
 import { selectedCredentialsAtom } from "~atoms/selectedCredentials";
 
-export const QrCode: React.FC = () => {
+export const QrCode: React.FC<{
+  selectedFields: any;
+}> = ({ selectedFields }) => {
   const [timeStamp, setTimestamp] = useState<number>(null);
   const [dateFormat, setDateFormat] = useState<string>("");
 
@@ -33,7 +35,7 @@ export const QrCode: React.FC = () => {
         logoSize={50}
         logo={icon}
         value={JSON.stringify({
-          selectedCredentials: selectedCredentials,
+          selectedFields: selectedFields,
           timeStamp: timeStamp,
           date: dateFormat,
         })}
