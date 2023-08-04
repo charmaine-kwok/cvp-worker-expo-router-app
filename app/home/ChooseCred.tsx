@@ -17,12 +17,12 @@ const ChooseCred: React.FC<{ setIsVisible: any }> = () => {
   const [isVisible, setIsVisible] = useState(false);
   const data = [
     { key: "0", value: t("Issuers"), disabled: true },
-    { key: "1", value: t("Issuer1") },
-    { key: "3", value: t("Issuer2") },
-    { key: "4", value: t("Credential Type"), disabled: true },
-    { key: "5", value: t("type1") },
-    { key: "6", value: t("type2") },
-    { key: "7", value: t("type3") },
+    { key: "1", value: "Issuer1" },
+    { key: "3", value: "Issuer2" },
+    // { key: "4", value: t("Credential Type"), disabled: true },
+    // { key: "5", value: "type1" },
+    // { key: "6", value: "type2" },
+    // { key: "7", value: "type3" },
   ];
 
   return (
@@ -34,7 +34,9 @@ const ChooseCred: React.FC<{ setIsVisible: any }> = () => {
       />
       <View className="bg-white pt-3 pb-2 px-2 rounded-lg">
         <MultipleSelectList
-          setSelected={(val) => setSelected(val)}
+          setSelected={(val) => {
+            setSelected(val);
+          }}
           onSelect={() => {
             setSelectedFields(selected);
           }}
