@@ -5,17 +5,26 @@ import { useAtomValue } from "jotai";
 
 import getTime from "~functions/getTime";
 import { DarkThemeAtom } from "~atoms/darkTheme";
-import { selectedCredentialsAtom } from "~atoms/selectedCredentials";
 
-export const QrCode: React.FC<{
-  selectedFields: any;
-}> = ({ selectedFields }) => {
+type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
+  U[keyof U];
+type Props = {
+  selectedFields?: any;
+  UUIDs?: any;
+  withIcon: boolean;
+};
+
+type QrCodeProps = AtLeastOne<Props>;
+
+export const QrCode: React.FC<QrCodeProps> = ({
+  selectedFields,
+  UUIDs,
+  withIcon = true,
+}) => {
   const [timeStamp, setTimestamp] = useState<number>(null);
   const [dateFormat, setDateFormat] = useState<string>("");
 
   const isDarkTheme = useAtomValue(DarkThemeAtom);
-  const selectedCredentials = useAtomValue(selectedCredentialsAtom);
-
   useEffect(() => {
     getTime(setTimestamp, setDateFormat);
     const interval = setInterval(() => {
@@ -33,9 +42,10 @@ export const QrCode: React.FC<{
         size={250}
         logoBackgroundColor={isDarkTheme ? "black" : "white"}
         logoSize={50}
-        logo={icon}
+        logo={withIcon && icon}
         value={JSON.stringify({
           selectedFields: selectedFields,
+          UUIDs: UUIDs,
           timeStamp: timeStamp,
           date: dateFormat,
         })}
