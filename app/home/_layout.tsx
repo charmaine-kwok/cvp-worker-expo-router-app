@@ -84,6 +84,13 @@ export default function Layout1() {
           headerShown: false,
         }}
       />
+      <Tabs.Screen
+        name="QrCodePage"
+        options={{
+          href: null,
+          headerTitle: `${t("QR Code")}`,
+        }}
+      />
     </Tabs>
   );
 }
