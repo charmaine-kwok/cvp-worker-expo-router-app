@@ -25,7 +25,7 @@ const MoreInfo: React.FC<MoreInfoProps> = ({
         message={`${t("Start date")}: ${start_date}\n${t(
           "End date",
         )}: ${end_date}`}
-        color={"#ffffff"}
+        color={"#000000"}
         onBackgroundPress={() => setIsHintVisible(false)}
       >
         <TouchableOpacity onPress={() => setIsHintVisible(!isHintVisible)}>
