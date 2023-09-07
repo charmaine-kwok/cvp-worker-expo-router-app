@@ -49,7 +49,7 @@ export default function Layout1() {
               <FontAwesome name="list" size={focused ? 28 : 24} color={color} />
             </TabBarIcon>
           ),
-          headerTitle: `${t("Select Required Credentials")}`,
+          headerTitle: t("Select Required Credentials"),
         }}
       />
       <Tabs.Screen
@@ -65,7 +65,7 @@ export default function Layout1() {
               />
             </TabBarIcon>
           ),
-          headerTitle: `${t("QRCodeScanner")}`,
+          headerTitle: t("QRCodeScanner"),
         }}
       />
 
@@ -88,7 +88,14 @@ export default function Layout1() {
         name="QrCodePage"
         options={{
           href: null,
-          headerTitle: `${t("QR Code")}`,
+          headerTitle: t("QR Code"),
+        }}
+      />
+      <Tabs.Screen
+        name="ScannedCredsPage"
+        options={{
+          href: null,
+          headerTitle: t("Scanned Results"),
         }}
       />
     </Tabs>
