@@ -8,7 +8,7 @@ import QRCodeModal from "~components/modal/QRCodeModal";
 import CustomButton from "~components/buttons/CustomButton";
 import { DarkThemeAtom } from "~atoms/darkTheme";
 
-const ChooseCred: React.FC<{ setIsVisible: any }> = () => {
+const ChooseFields: React.FC<{ setIsVisible: any }> = () => {
   const { t } = useTranslation();
   const isDarkTheme = useAtomValue(DarkThemeAtom);
 
@@ -19,10 +19,10 @@ const ChooseCred: React.FC<{ setIsVisible: any }> = () => {
     { key: "0", value: t("Issuers"), disabled: true },
     { key: "1", value: "Issuer1" },
     { key: "3", value: "Issuer2" },
-    // { key: "4", value: t("Credential Type"), disabled: true },
-    // { key: "5", value: "type1" },
-    // { key: "6", value: "type2" },
-    // { key: "7", value: "type3" },
+    { key: "4", value: t("Credential Type"), disabled: true },
+    { key: "5", value: "type1" },
+    { key: "6", value: "type2" },
+    { key: "7", value: "type3" },
   ];
 
   return (
@@ -39,6 +39,7 @@ const ChooseCred: React.FC<{ setIsVisible: any }> = () => {
           }}
           onSelect={() => {
             setSelectedFields(selected);
+            console.log(selectedFields);
           }}
           data={data}
           placeholder={t("Select Required Credentials")}
@@ -55,7 +56,9 @@ const ChooseCred: React.FC<{ setIsVisible: any }> = () => {
             fgColor={isDarkTheme ? "#000000" : "#ffffff"}
             bold={false}
             bgColor={isDarkTheme ? "#ffffff" : "#000000"}
-            onPress={() => setIsVisible(!isVisible)}
+            onPress={() => {
+              setIsVisible(!isVisible);
+            }}
           ></CustomButton>
         )}
       </View>
@@ -63,4 +66,4 @@ const ChooseCred: React.FC<{ setIsVisible: any }> = () => {
   );
 };
 
-export default ChooseCred;
+export default ChooseFields;

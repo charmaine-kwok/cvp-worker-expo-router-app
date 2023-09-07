@@ -41,9 +41,9 @@ export default function Layout1() {
         }}
       />
       <Tabs.Screen
-        name="ChooseCred"
+        name="ChooseFields"
         options={{
-          href: usernameData === "admin" ? "home/ChooseCred" : null,
+          href: usernameData === "admin" ? "home/ChooseFields" : null,
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon focused={focused}>
               <FontAwesome name="list" size={focused ? 28 : 24} color={color} />
