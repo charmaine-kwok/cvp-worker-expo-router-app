@@ -70,7 +70,7 @@ const CrendentialList: React.FC<CrendentialListProps> = ({
   };
 
   return (
-    <SafeAreaView className="h-[80%]">
+    <SafeAreaView className="h-[85%]">
       <View
         style={{
           paddingVertical: "2%",
