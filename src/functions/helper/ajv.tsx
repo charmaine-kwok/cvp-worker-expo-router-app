@@ -3,10 +3,10 @@ import { JTDDataType } from "ajv/dist/core";
 
 const ajv = new Ajv({ allErrors: true });
 
-const ScannedCertFieldSchema = {
+const ScannedFieldsSchema = {
   type: "object",
   properties: {
-    selectedCredentials: {
+    selectedFields: {
       type: "array",
       items: {
         type: "string",
@@ -15,12 +15,33 @@ const ScannedCertFieldSchema = {
     date: { type: "string" },
     timeStamp: { type: "integer" },
   },
-  required: ["selectedCredentials", "date", "timeStamp"],
+  required: ["selectedFields", "date", "timeStamp"],
   additionalProperties: false,
 } as const;
 
-type ScannedCertField = JTDDataType<typeof ScannedCertFieldSchema>;
+const ScannedUUIDsSchema = {
+  type: "object",
+  properties: {
+    UUIDs: {
+      type: "array",
+      items: {
+        type: "string",
+      },
+    },
+    workerId: { type: "string" },
+    date: { type: "string" },
+    timeStamp: { type: "number" },
+  },
+  required: ["UUIDs", "workerId", "date", "timeStamp"],
+  additionalProperties: false,
+} as const;
 
-export const validateScannedCert = ajv.compile<ScannedCertField>(
-  ScannedCertFieldSchema,
-);
+type ScannedCertField = JTDDataType<typeof ScannedFieldsSchema>;
+
+type ScannedUUIDsField = JTDDataType<typeof ScannedUUIDsSchema>;
+
+export const validateScannedFields =
+  ajv.compile<ScannedCertField>(ScannedFieldsSchema);
+
+export const validateScannedUUIDs =
+  ajv.compile<ScannedUUIDsField>(ScannedUUIDsSchema);
