@@ -92,7 +92,7 @@ export default function Layout1() {
         }}
       />
       <Tabs.Screen
-        name="ScannedCredsPage"
+        name="ScannedResultsPage"
         options={{
           href: null,
           headerTitle: t("Scanned Results"),
