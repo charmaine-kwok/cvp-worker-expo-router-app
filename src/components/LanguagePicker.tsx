@@ -32,7 +32,7 @@ const LanguagePicker = () => {
   );
 
   return (
-    <View className="my-4">
+    <View className="my-2 sm:my-4">
       <Modal
         animationType="slide"
         transparent={true}
