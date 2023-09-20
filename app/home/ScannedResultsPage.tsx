@@ -9,6 +9,7 @@ import getCredentialDetails from "~functions/api/credential/getCredentialDetails
 import { itemProps } from "~functions/api/credential/getCredentialList";
 import { getValueFor } from "app/(auth)/sign-in";
 import { fontSizeAtom } from "~atoms/fontSize";
+import Loading from "~components/Loading";
 
 export default function ScannedResultsPage() {
   const fontSizeData = useAtomValue(fontSizeAtom);
@@ -16,6 +17,7 @@ export default function ScannedResultsPage() {
   const data = params.data as string;
   console.log("data", data);
   const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState(false);
 
   const scannedData: {
     date: string;
@@ -30,12 +32,13 @@ export default function ScannedResultsPage() {
   console.log("UUIDs", scannedData.UUIDs);
 
   const fetchData = async () => {
-    console.log("fetchingData");
+    setIsLoading(true);
     const accessToken = await getValueFor("accessToken");
 
     const fetchData = async (UUID: string, accessToken: string) => {
       try {
         const data = await getCredentialDetails(UUID, accessToken);
+        setIsLoading(false);
         if (data) {
           return {
             UUID: data.UUID,
@@ -74,7 +77,8 @@ export default function ScannedResultsPage() {
   console.log(JSON.parse(data), "scaned data");
   const listOfUUID: string[] = JSON.parse(data);
   return (
-    <View bg-screenBG className="flex items-center justify-center py-4 h-full">
+    <View bg-screenBG className="py-4 h-full">
+      {isLoading && <Loading />}
       <FlatList
         className="h-full"
         data={creds}
@@ -89,7 +93,7 @@ export default function ScannedResultsPage() {
                 {t(`${item.credentialType}`)}
               </Text>
             </View>
-            <View bg-textColor className="h-[1px]"></View>
+            <View bg-textColor className="h-[1px]" />
           </View>
         )}
         keyExtractor={(item) => item.UUID}
