@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getValueFor } from "app/(auth)/sign-in";
 
 export type itemProps = {
   UUID: string;
@@ -20,7 +20,7 @@ const getCredentialList = async (
   total_items: number;
   total_pages: number;
 }> => {
-  const accessToken = (await AsyncStorage.getItem("accessToken")) as string;
+  const accessToken = await getValueFor("accessToken");
 
   // Retrieving cert id list from API server
   const response = await fetch(
