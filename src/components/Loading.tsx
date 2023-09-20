@@ -1,10 +1,17 @@
-import { ActivityIndicator, View } from "react-native";
+import { LoaderScreen } from "react-native-ui-lib";
+import { useAtomValue } from "jotai";
+
+import { DarkThemeAtom } from "~atoms/darkTheme";
 
 const Loading: React.FC = () => {
+  const isDarkTheme = useAtomValue(DarkThemeAtom);
+
   return (
-    <View className="h-full items-center justify-center flex-row">
-      <ActivityIndicator className="mt-4" size="large" color="#999999" />
-    </View>
+    <LoaderScreen
+      overlay={true}
+      loaderColor={`${isDarkTheme ? "white" : "black"}`}
+      backgroundColor="rgba(0, 0, 0, 0.3)"
+    />
   );
 };
 
