@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "expo-router";
 import { View } from "react-native-ui-lib";
 import { useAtomValue, useSetAtom } from "jotai";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { getValueFor } from "app/(auth)/sign-in";
 import expiredCredentialsAtom from "~atoms/expiredCredentials";
 import ExpiredButton from "~components/buttons/ExpiredButton";
 import CrendentialList from "~components/credentials/CredentialList";
@@ -12,12 +12,14 @@ import getCertList from "~functions/api/credential/getCredentialList";
 import { itemProps } from "~functions/api/credential/getCredentialList";
 import getCertDetails from "~functions/api/credential/getCredentialDetails";
 import { selectedCredentialsAtom } from "~atoms/selectedCredentials";
+import { credentialsAtom } from "~atoms/credentials";
 
 const CrendentialListPage: React.FC = () => {
   const router = useRouter();
   const usernameData = useAtomValue(usernameAtom);
   const setExpiredCredentialsData = useSetAtom(expiredCredentialsAtom);
   const setSelectedCredentials = useSetAtom(selectedCredentialsAtom);
+  const setCredentialAtom = useSetAtom(credentialsAtom);
 
   const [totalItem, setTotalItem] = useState<number | null>(null);
   const [showLoadMoreButton, setShowLoadMoreButton] = useState<boolean>(false);
@@ -36,6 +38,7 @@ const CrendentialListPage: React.FC = () => {
     try {
       const data = await getCertList(usernameData, currentPage, pageSize);
       if (data) {
+        console.log("data", data);
         setTotalItem(data.total_items);
         setShowLoadMoreButton(
           data.total_items - data.page_size * currentPage > 0,
@@ -58,43 +61,40 @@ const CrendentialListPage: React.FC = () => {
             console.log("error:", e);
           }
         };
-        const accessToken = (await AsyncStorage.getItem(
-          "accessToken",
-        )) as string;
+        const accessToken = await getValueFor("accessToken");
 
-        const items: itemProps[] = await Promise.all(
+        const UUIDs: itemProps[] = await Promise.all(
           data.items.map((item: string) => fetchData(item, accessToken)),
         );
 
-        if (items && items.length > 0) {
-          console.log("items", items);
+        if (UUIDs && UUIDs.length > 0) {
+          console.log("UUIDs", UUIDs);
+
           // seperate cert into valid and expired
-          let validItems = items.filter((item) => item.isValid);
-          setExpiredCredentials(items.filter((item) => !item.isValid));
-          const expiredItems = items.filter((item) => !item.isValid);
+          let validItems = UUIDs.filter((item) => item.isValid);
+          setCredentialAtom(validItems);
+          setExpiredCredentials(UUIDs.filter((item) => !item.isValid));
+          const expiredItems = UUIDs.filter((item) => !item.isValid);
           if (expiredItems && expiredItems.length > 0) {
             setExpiredCredentialsData(expiredItems);
           }
           // group certList by Issuer
           setGroupedByIssuer(
-            validItems.reduce(
-              (acc, item) => {
-                // use the issuer as the key
-                const key = item.issuer;
+            validItems.reduce((acc, item) => {
+              // use the issuer as the key
+              const key = item.issuer;
 
-                // if this issuer is not in the accumulator, add it with an empty array
-                if (!acc[key]) {
-                  acc[key] = [];
-                }
+              // if this issuer is not in the accumulator, add it with an empty array
+              if (!acc[key]) {
+                acc[key] = [];
+              }
 
-                // push the current item into the array for this issuer
-                acc[key].push(item);
+              // push the current item into the array for this issuer
+              acc[key].push(item);
 
-                // return the accumulator for the next iteration
-                return acc;
-              },
-              {} as Record<string, itemProps[]>,
-            ),
+              // return the accumulator for the next iteration
+              return acc;
+            }, {} as Record<string, itemProps[]>),
           );
         }
       }
