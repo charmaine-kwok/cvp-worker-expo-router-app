@@ -6,21 +6,20 @@ import { useAtomValue } from "jotai";
 import getTime from "~functions/getTime";
 import { DarkThemeAtom } from "~atoms/darkTheme";
 
-type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
-  U[keyof U];
-type Props = {
-  selectedFields?: any;
-  UUIDs?: any;
-  withIcon: boolean;
+type TypeQRCode = TypeFieldsQRCode | TypeUUIDsQRCode;
+
+export type TypeFieldsQRCode = {
+  selectedFields: string[];
+  withIcon?: boolean;
 };
 
-type QrCodeProps = AtLeastOne<Props>;
+export type TypeUUIDsQRCode = {
+  UUIDs: string[];
+  workerId: string;
+  withIcon?: boolean;
+};
 
-export const QrCode: React.FC<QrCodeProps> = ({
-  selectedFields,
-  UUIDs,
-  withIcon = true,
-}) => {
+export function QrCode<T extends TypeQRCode>(props: T) {
   const [timeStamp, setTimestamp] = useState<number>(null);
   const [dateFormat, setDateFormat] = useState<string>("");
 
@@ -34,6 +33,19 @@ export const QrCode: React.FC<QrCodeProps> = ({
   }, []);
 
   let icon = require("../../../assets/icon/icons8.png");
+
+  let qrValue: any = {
+    timeStamp: timeStamp,
+    date: dateFormat,
+  };
+
+  if ("selectedFields" in props) {
+    qrValue.selectedFields = props.selectedFields;
+  } else {
+    qrValue.UUIDs = props.UUIDs;
+    qrValue.workerId = props.workerId;
+  }
+
   return (
     <View className="mb-4">
       <QRCode
@@ -42,16 +54,11 @@ export const QrCode: React.FC<QrCodeProps> = ({
         size={250}
         logoBackgroundColor={isDarkTheme ? "black" : "white"}
         logoSize={50}
-        logo={withIcon && icon}
-        value={JSON.stringify({
-          selectedFields: selectedFields,
-          UUIDs: UUIDs,
-          timeStamp: timeStamp,
-          date: dateFormat,
-        })}
+        logo={props.withIcon && icon}
+        value={JSON.stringify(qrValue)}
       />
     </View>
   );
-};
+}
 
 export default QrCode;

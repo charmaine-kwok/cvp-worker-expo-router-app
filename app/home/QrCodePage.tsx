@@ -1,7 +1,7 @@
 import { View } from "react-native-ui-lib";
 import { useSearchParams } from "expo-router";
 
-import QrCode from "~components/qrCode/qrCode";
+import QrCode, { TypeUUIDsQRCode } from "~components/qrCode/qrCode";
 
 export default function QrCodePage() {
   const params = useSearchParams();
@@ -11,7 +11,11 @@ export default function QrCodePage() {
   const listOfUUID: string[] = JSON.parse(data);
   return (
     <View bg-screenBG className="flex items-center justify-center py-4 h-full">
-      <QrCode UUIDs={listOfUUID} workerId={workerId} withIcon={false} />
+      <QrCode<TypeUUIDsQRCode>
+        UUIDs={listOfUUID}
+        workerId={workerId}
+        withIcon={false}
+      />
     </View>
   );
 }
