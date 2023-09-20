@@ -14,7 +14,8 @@
       "infoPlist": {
         "UIViewControllerBasedStatusBarAppearance": true,
         "NSFaceIDUsageDescription": "Allow $(PRODUCT_NAME) to use Face ID",
-        "NSCameraUsageDescription": "Allow $(PRODUCT_NAME) to use Camera"
+        "NSCameraUsageDescription": "Allow $(PRODUCT_NAME) to use Camera",
+        "LSApplicationQueriesSchemes": ["hk.gov.iamsmart.testapp"]
       },
       "icon": "./assets/icon/icons8.png",
       "splash": {
@@ -31,7 +32,20 @@
         "backgroundColor": "#e5e5e5"
       },
       "icon": "./assets/icon/icons8.png",
-      "package": "com.user9510.cvpworkerexporouterapp"
+      "package": "com.user9510.cvpworkerexporouterapp",
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "cvp.demo.app"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ]
     },
     "extra": {
       "eas": {
