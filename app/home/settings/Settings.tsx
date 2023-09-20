@@ -4,8 +4,9 @@ import { useTranslation } from "react-i18next";
 import { Text } from "react-native-ui-lib";
 import { useRouter } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 
+import { isLoggedInAtom } from "~atoms/isLoggedIn";
 import { removeAccessToken } from "app/(auth)/sign-in";
 import FontSizeModal from "~components/modal/FontSizeModal";
 import { fontSizeAtom } from "~atoms/fontSize";
@@ -17,6 +18,8 @@ export default function Settings() {
   const router = useRouter();
 
   const fontSizeData = useAtomValue(fontSizeAtom);
+
+  const setIsLoggedIn = useSetAtom(isLoggedInAtom);
 
   const settingsList: { name: string; onPress: () => any }[] = [
     {
@@ -42,6 +45,7 @@ export default function Settings() {
 
       onPress: () => {
         removeAccessToken("accessToken");
+        setIsLoggedIn(false);
         router.replace("/(auth)/sign-in");
       },
     },
