@@ -28,18 +28,18 @@ export default function Settings() {
         router.push("/home/settings/language");
       },
     },
-    {
-      name: t("FontSize"),
-      onPress: () => {
-        setIsVisible(true);
-      },
-    },
-    {
-      name: t("DarkMode"),
-      onPress: () => {
-        router.push("/home/settings/theme");
-      },
-    },
+    // {
+    //   name: t("FontSize"),
+    //   onPress: () => {
+    //     setIsVisible(true);
+    //   },
+    // },
+    // {
+    //   name: t("DarkMode"),
+    //   onPress: () => {
+    //     router.push("/home/settings/theme");
+    //   },
+    // },
     {
       name: t("SignOut"),
 
