@@ -15,7 +15,7 @@ export default function Entry() {
         isLoggedIn
           ? username !== "admin"
             ? "/home/credential"
-            : "/home/ChooseFields"
+            : "/home/selectFields/ChooseFieldsPage"
           : "/(auth)/sign-in"
       }
     />

@@ -41,15 +41,16 @@ export default function Layout1() {
         }}
       />
       <Tabs.Screen
-        name="ChooseFields"
+        name="selectFields"
         options={{
-          href: usernameData === "admin" ? "home/ChooseFields" : null,
+          href: usernameData === "admin" ? "home/" : null,
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon focused={focused}>
               <FontAwesome name="list" size={focused ? 28 : 24} color={color} />
             </TabBarIcon>
           ),
           headerTitle: t("Select Required Credentials"),
+          headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -85,7 +86,7 @@ export default function Layout1() {
         }}
       />
       <Tabs.Screen
-        name="QrCodePage"
+        name="WorkerQrCodePage"
         options={{
           href: null,
           headerTitle: t("QR Code"),
