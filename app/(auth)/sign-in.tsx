@@ -11,6 +11,7 @@ import { useSetAtom } from "jotai";
 import { useForm } from "react-hook-form";
 import * as SecureStore from "expo-secure-store";
 
+import { CLIENT_ID } from "@env";
 import Loading from "~components/Loading";
 import { usernameAtom } from "~atoms/username";
 import LanguagePicker from "~components/LanguagePicker";
@@ -46,33 +47,6 @@ export default function SignIn() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const getToken = async (code: string, state: string) => {
-    try {
-      // FIXME: use 1.12
-      const response = await fetch(
-        `http://192.168.2.30:8080/getToken?code=${code}&state=${state}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        },
-      );
-
-      const data = await response.json();
-
-      // Check if the request was successful
-      if (!response.ok) {
-        console.log("Error response:", data);
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      console.log("Data:", data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const openIAmSmart = (url: string) => {
     Linking.openURL(url);
   };
@@ -94,13 +68,15 @@ export default function SignIn() {
   const setAccessToken = useSetAtom(accessTokenAtom);
 
   const iLoginHandler = async () => {
-    // FIXME: use 1.12
-    const response = await fetch("http://192.168.2.24:8080/iAmSmartLogin", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      `http://192.168.2.41:8080/iAmSmartLogin?clientID=${CLIENT_ID}&responseType=code&source=App_Scheme&redirectURI="https://cvp.demo.app/sign-in"&scope=eidapi_auth`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    });
+    );
 
     const data: { url: string } = await response.json();
     const iAmSmartUrl = data.url;
@@ -135,7 +111,7 @@ export default function SignIn() {
         // redirect to MainScreen
 
         if (username === "admin") {
-          router.replace("/home/ChooseFields");
+          router.replace("/home/selectFields/ChooseFieldsPage");
         } else {
           router.replace("/home/credential");
         }
@@ -160,73 +136,75 @@ export default function SignIn() {
     <>
       <Stack.Screen options={{ headerShown: false }} />
       <DismissKeyboard>
-        {isLoading && <Loading />}
-        <View className="items-center justify-center bg-[#d3d3d3] flex-1">
-          <Image
-            className={`w-[250px] sm:w-[300px] h-[25%]`}
-            resizeMode="contain"
-            source={require("../../assets/icon/icons8.png")}
-          ></Image>
-          <Text black className="text-2xl mb-4">
-            {t("Hello")}
-          </Text>
-          <Text black className="mb-4">
-            {t("Please Login to Your Account")}
-          </Text>
-
-          <CustomInput
-            placeholder={t("Username")}
-            icon={<FontAwesome name="user" size={24} color="darkgrey" />}
-            password={false}
-            name="username"
-            control={control}
-            errors={errors}
-          />
-          <CustomInput
-            placeholder={t("Password")}
-            icon={<Entypo name="lock" size={24} color="darkgrey" />}
-            password={true}
-            name="password"
-            control={control}
-            errors={errors}
-          />
-
-          <Button
-            bg-black
-            onPress={handleSubmit(loginHandler)}
-            className="w-[70%] my-1 sm:my-2"
-          >
-            <Text white className="font-bold">
-              {t("SignIn")}
+        <>
+          {isLoading && <Loading />}
+          <View className="items-center justify-center bg-[#d3d3d3] flex-1">
+            <Image
+              className={`w-[250px] sm:w-[300px] h-[25%]`}
+              resizeMode="contain"
+              source={require("../../assets/icon/icons8.png")}
+            ></Image>
+            <Text black className="text-2xl mb-4">
+              {t("Hello")}
             </Text>
-          </Button>
-          <View className="flex flex-row items-center my-2 sm:my-4 space-x-8">
-            <Dash
-              style={{ width: "35%" }}
-              dashGap={10}
-              dashLength={10}
-              dashThickness={1}
+            <Text black className="mb-4">
+              {t("Please Login to Your Account")}
+            </Text>
+
+            <CustomInput
+              placeholder={t("Username")}
+              icon={<FontAwesome name="user" size={24} color="darkgrey" />}
+              password={false}
+              name="username"
+              control={control}
+              errors={errors}
             />
-            <Text black>{t("Or")}</Text>
-            <Dash
-              style={{ width: "35%" }}
-              dashGap={10}
-              dashLength={10}
-              dashThickness={1}
+            <CustomInput
+              placeholder={t("Password")}
+              icon={<Entypo name="lock" size={24} color="darkgrey" />}
+              password={true}
+              name="password"
+              control={control}
+              errors={errors}
             />
+
+            <Button
+              bg-black
+              onPress={handleSubmit(loginHandler)}
+              className="w-[70%] my-1 sm:my-2"
+            >
+              <Text white className="font-bold">
+                {t("SignIn")}
+              </Text>
+            </Button>
+            <View className="flex flex-row items-center my-2 sm:my-4 space-x-8">
+              <Dash
+                style={{ width: "35%" }}
+                dashGap={10}
+                dashLength={10}
+                dashThickness={1}
+              />
+              <Text black>{t("Or")}</Text>
+              <Dash
+                style={{ width: "35%" }}
+                dashGap={10}
+                dashLength={10}
+                dashThickness={1}
+              />
+            </View>
+            <Button
+              onPress={iLoginHandler}
+              bg-green10
+              className="w-[70%] my-1 sm:my-2"
+            >
+              <Text white className="font-bold">
+                {t("Login by iAM Smart")}
+              </Text>
+            </Button>
+
+            <LanguagePicker />
           </View>
-          <Button
-            onPress={iLoginHandler}
-            bg-green10
-            className="w-[70%] my-1 sm:my-2"
-          >
-            <Text white className="font-bold">
-              {t("Login by iAM Smart")}
-            </Text>
-          </Button>
-
-          <LanguagePicker />
-        </View>
+        </>
       </DismissKeyboard>
     </>
   );
