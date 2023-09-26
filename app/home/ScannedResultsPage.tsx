@@ -18,6 +18,7 @@ export default function ScannedResultsPage() {
   console.log("data", data);
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
+  const [scanned, setScanned] = useState(false);
 
   const scannedData: {
     date: string;
@@ -49,6 +50,7 @@ export default function ScannedResultsPage() {
             end_date: data.end_date,
           };
         }
+        setScanned(true);
       } catch (e) {
         console.log("error:", e);
       }
@@ -75,29 +77,37 @@ export default function ScannedResultsPage() {
 
   // list of UUIDs
   console.log(JSON.parse(data), "scaned data");
-  const listOfUUID: string[] = JSON.parse(data);
   return (
     <View bg-screenBG className="py-4 h-full">
-      {isLoading && <Loading />}
-      <FlatList
-        className="h-full"
-        data={creds}
-        renderItem={({ item }) => (
-          <View key={item.UUID}>
-            <View className="px-4 py-2">
-              <Text textColor className={`text-${fontSizeData + 1}xl`}>
-                {item.UUID}
-                {"\n"}
-                {t(`${item.issuer}`)}
-                {"\n"}
-                {t(`${item.credentialType}`)}
-              </Text>
+      {scannedData.UUIDs.length !== 0 && isLoading && <Loading />}
+      {scannedData.UUIDs.length !== 0 && (
+        <FlatList
+          className="h-full"
+          data={creds}
+          renderItem={({ item }) => (
+            <View key={item.UUID}>
+              <View className="px-4 py-2">
+                <Text textColor className={`text-${fontSizeData + 1}xl`}>
+                  {item.UUID}
+                  {"\n"}
+                  {t(item.issuer)}
+                  {"\n"}
+                  {t(item.credentialType)}
+                  {"\n"}
+                  {t("Start date")}: {t(item.start_date.split("T")[0])}
+                  {"\n"}
+                  {t("End date")}: {t(item.end_date.split("T")[0])}
+                </Text>
+              </View>
+              <View bg-textColor className="h-[1px]" />
             </View>
-            <View bg-textColor className="h-[1px]" />
-          </View>
-        )}
-        keyExtractor={(item) => item.UUID}
-      />
+          )}
+          keyExtractor={(item) => item.UUID}
+        />
+      )}
+      {scannedData.UUIDs.length === 0 && (
+        <Text className="text-center">{t("No required credentials")}</Text>
+      )}
     </View>
   );
 }
