@@ -1,6 +1,8 @@
 {
   "translation": {
     "Hello": "Hello",
+    "Categories": "Categories",
+    "Selected": "Selected",
     "Please Login to Your Account": "Please Login to Your Account",
     "Username": "Username",
     "Password": "Password",
@@ -13,6 +15,7 @@
     "Select Required Credentials": "Select Required Credentials",
     "Credential Info": "Credential Info",
     "Expired Credentials": "Expired Credentials",
+    "No required credentials": "No required credentials",
     "CertId": "Cert ID",
     "QR Code": "QR Code",
     "Generate QR code": "Generate QR code",
@@ -22,6 +25,7 @@
     "QRCodeScanner": "QR Code Scanner",
     "Scanned Results": "Scanned Results",
     "TapToScanAgain": "Tap to Scan Again",
+    "Scan worker's QR code": "Scan worker's QR code",
     "Language": "Language",
     "SignOut": "Sign Out",
     "Build": "Build",

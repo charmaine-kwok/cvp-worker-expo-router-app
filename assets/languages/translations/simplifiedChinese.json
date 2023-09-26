@@ -1,6 +1,8 @@
 {
   "translation": {
     "Hello": "你好",
+    "Categories": "类别",
+    "Selected": "已选择",
     "Please Login to Your Account": "请登入您的账户",
     "Username": "用户名称",
     "Password": "密码",
@@ -13,6 +15,7 @@
     "Select Required Credentials": "选择所需凭证",
     "Credential Info": "凭证内容",
     "Expired Credentials": "已到期凭证",
+    "No required credentials": "没有所需凭证",
     "CertId": "凭证号码",
     "QR Code": "二维码",
     "Generate QR code": "生成二维码",
@@ -22,6 +25,7 @@
     "QRCodeScanner": "二维码扫描器",
     "Scanned Results": "扫描结果",
     "TapToScanAgain": "点击再次扫描",
+    "Scan worker's QR code": "扫描工人二维码",
     "Language": "语言",
     "SignOut": "登出",
     "Build": "程式版本",
