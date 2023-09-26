@@ -42,7 +42,6 @@ export default function BarCodeScan() {
 
   const handleBarCodeScanned = async ({ data }: { data: string }) => {
     setScanned(true);
-
     const timeObj = getTime();
     const currentTime = timeObj.currentTime;
 
@@ -78,15 +77,29 @@ export default function BarCodeScan() {
           ]);
         }
 
-        const filteredCreds = credentials.filter((credential: itemProps) => {
-          return (
-            scannedData.selectedFields.includes(credential.issuer) &&
-            scannedData.selectedFields.includes(credential.credentialType)
-          );
-        });
+        let filteredCreds: any;
+
+        if (
+          !scannedData.selectedFields.includes("I") ||
+          !scannedData.selectedFields.includes("T")
+        ) {
+          filteredCreds = credentials.filter((credential: itemProps) => {
+            return (
+              scannedData.selectedFields.includes(credential.issuer) ||
+              scannedData.selectedFields.includes(credential.credentialType)
+            );
+          });
+        } else {
+          filteredCreds = credentials.filter((credential: itemProps) => {
+            return (
+              scannedData.selectedFields.includes(credential.issuer) &&
+              scannedData.selectedFields.includes(credential.credentialType)
+            );
+          });
+        }
 
         router.push({
-          pathname: "home/QrCodePage",
+          pathname: "home/WorkerQrCodePage",
           params: {
             data: JSON.stringify(filteredCreds.map((item) => item.UUID)),
             workerId: username,
@@ -98,7 +111,6 @@ export default function BarCodeScan() {
         ]);
       }
     } else {
-      console.log("sth like that");
       if (validateScannedUUIDs(scannedData)) {
         const timeStamp = scannedData.timeStamp as number;
         // Check if the scanned QR code has expired (i.e. produced more than 1 minute ago)
