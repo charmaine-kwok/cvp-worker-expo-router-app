@@ -1,40 +1,36 @@
 import { useState } from "react";
 import { View } from "react-native-ui-lib";
-import { MultipleSelectList } from "react-native-dropdown-select-list";
 import { useTranslation } from "react-i18next";
 import { useAtomValue } from "jotai";
+import { useRouter } from "expo-router";
 
-import QRCodeModal from "~components/modal/QRCodeModal";
+import MultipleSelectList from "~components/MultipleSelectList";
 import CustomButton from "~components/buttons/CustomButton";
 import { DarkThemeAtom } from "~atoms/darkTheme";
 
-const ChooseFields: React.FC<{ setIsVisible: any }> = () => {
+const ChooseFieldsPage: React.FC = () => {
   const { t } = useTranslation();
   const isDarkTheme = useAtomValue(DarkThemeAtom);
 
   const [selected, setSelected] = useState("");
   const [selectedFields, setSelectedFields] = useState<any>(null);
-  const [isVisible, setIsVisible] = useState(false);
   const data = [
-    { key: "0", value: t("Issuers"), disabled: true },
-    { key: "1", value: "Issuer1" },
-    { key: "3", value: "Issuer2" },
-    { key: "4", value: t("Credential Type"), disabled: true },
-    { key: "5", value: "type1" },
-    { key: "6", value: "type2" },
-    { key: "7", value: "type3" },
+    { value: t("Issuers"), disabled: true },
+    { key: "I", value: "CIC" },
+    { key: "I", value: "EMSD" },
+    { key: "I", value: "TT" },
+    { value: t("Credential Type"), disabled: true },
+    { key: "T", value: "Certificate" },
+    { key: "T", value: "Trade" },
+    { key: "T", value: "Worker Card" },
   ];
+  const router = useRouter();
 
   return (
     <View bg-screenBG className="h-full p-4">
-      <QRCodeModal
-        isVisible={isVisible}
-        setIsVisible={setIsVisible}
-        selectedFields={selectedFields}
-      />
       <View className="bg-white pt-3 pb-2 px-2 rounded-lg">
         <MultipleSelectList
-          setSelected={(val) => {
+          setSelected={(val: string) => {
             setSelected(val);
           }}
           onSelect={() => {
@@ -45,7 +41,8 @@ const ChooseFields: React.FC<{ setIsVisible: any }> = () => {
           placeholder={t("Select Required Credentials")}
           searchPlaceholder={t("Search")}
           save="value"
-          label="Categories"
+          label={t("Selected")}
+          selectedLabel={t("Selected")}
         />
       </View>
       <View className="flex items-center px-4">
@@ -57,7 +54,12 @@ const ChooseFields: React.FC<{ setIsVisible: any }> = () => {
             bold={false}
             bgColor={isDarkTheme ? "#ffffff" : "#000000"}
             onPress={() => {
-              setIsVisible(!isVisible);
+              router.push({
+                pathname: "home/selectFields/AdminQrCodePage",
+                params: {
+                  selectedFields: JSON.stringify(selectedFields),
+                },
+              });
             }}
           ></CustomButton>
         )}
@@ -66,4 +68,4 @@ const ChooseFields: React.FC<{ setIsVisible: any }> = () => {
   );
 };
 
-export default ChooseFields;
+export default ChooseFieldsPage;
