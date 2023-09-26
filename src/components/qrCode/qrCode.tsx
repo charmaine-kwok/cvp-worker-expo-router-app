@@ -9,7 +9,7 @@ import { DarkThemeAtom } from "~atoms/darkTheme";
 type TypeQRCode = TypeFieldsQRCode | TypeUUIDsQRCode;
 
 export type TypeFieldsQRCode = {
-  selectedFields: string[];
+  selectedFields: string;
   withIcon?: boolean;
 };
 
@@ -40,7 +40,7 @@ export function QrCode<T extends TypeQRCode>(props: T) {
   };
 
   if ("selectedFields" in props) {
-    qrValue.selectedFields = props.selectedFields;
+    qrValue.selectedFields = JSON.parse(props.selectedFields);
   } else {
     qrValue.UUIDs = props.UUIDs;
     qrValue.workerId = props.workerId;
