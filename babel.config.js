@@ -7,9 +7,14 @@ module.exports = function (api) {
       "nativewind/babel",
       require.resolve("expo-router/babel"),
       "react-native-reanimated/plugin",
-    ],
-
-    plugins: [
+      [
+        "module:react-native-dotenv",
+        {
+          envName: "APP_ENV",
+          moduleName: "@env",
+          path: ".env",
+        },
+      ],
       [
         "module-resolver",
         {
@@ -23,10 +28,6 @@ module.exports = function (api) {
           },
         },
       ],
-      "@babel/plugin-proposal-export-namespace-from",
-      "react-native-reanimated/plugin",
-      "nativewind/babel",
-      require.resolve("expo-router/babel"),
     ],
   };
 };

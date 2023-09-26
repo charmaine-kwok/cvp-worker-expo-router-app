@@ -6,7 +6,9 @@
       "~*": ["src/*"]
     },
     "allowJs": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "typeRoots": ["./src/types"],
   },
   "exclude": ["node_modules", "dist", "build"],
   "extends": "expo/tsconfig.base"
