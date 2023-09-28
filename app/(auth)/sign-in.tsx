@@ -2,7 +2,7 @@ import { Image, Alert } from "react-native";
 import { View, Text, Button } from "react-native-ui-lib";
 import Dash from "react-native-dash";
 import { useState, useEffect } from "react";
-import { Stack, useRouter, useSearchParams } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { FontAwesome, Entypo } from "@expo/vector-icons";
 import * as Linking from "expo-linking";
 import { useTranslation } from "react-i18next";
@@ -41,13 +41,15 @@ export default function SignIn() {
   const { t } = useTranslation();
 
   // authCode return by iAmSmart
-  const params = useSearchParams();
-  const code = params.code as string;
-  const state = params.state as string;
+  const url = Linking.useURL();
+  console.log(url);
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const openIAmSmart = (url: string) => {
+  const openIAmSmart = () => {
+    const redirectURI = "myapp://sign-in";
+    const encodedRedirectURI = encodeURIComponent(redirectURI);
+    const url = `hk.gov.iamsmart.testapp://auth/iAmSmartLogin?clientID=${CLIENT_ID}&responseType=code&source=App_Scheme&redirectURI=${encodedRedirectURI}&scope=eidapi_auth`;
     Linking.openURL(url);
   };
 
@@ -67,70 +69,50 @@ export default function SignIn() {
   const setUsernameData = useSetAtom(usernameAtom);
   const setAccessToken = useSetAtom(accessTokenAtom);
 
-  const iLoginHandler = async () => {
-    const response = await fetch(
-      `http://192.168.2.41:8080/iAmSmartLogin?clientID=${CLIENT_ID}&responseType=code&source=App_Scheme&redirectURI="https://cvp.demo.app/sign-in"&scope=eidapi_auth`,
-      {
-        method: "GET",
+  const loginHandler = async ({ username, password }) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch("http://192.168.1.12:8081/auth/", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-      },
-    );
-
-    const data: { url: string } = await response.json();
-    const iAmSmartUrl = data.url;
-    console.log(iAmSmartUrl);
-    openIAmSmart(iAmSmartUrl);
-  };
-
-  const loginHandler = async ({ username, password }) => {
-    setIsLoading(true);
-    fetch("http://192.168.1.12:8081/auth/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Login failed");
-        }
-        return response.text();
-      })
-      .then((data) => {
-        // store token in ExpoSecureStore
-        save("accessToken", data);
-        setAccessToken(data);
-        console.log(data);
-
-        AsyncStorage.setItem("username", username);
-
-        setUsernameData(username);
-        // redirect to MainScreen
-
-        if (username === "admin") {
-          router.replace("/home/selectFields/ChooseFieldsPage");
-        } else {
-          router.replace("/home/credential");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        Alert.alert(
-          "Login failed",
-          "Please check your username and password and try again.",
-        );
+        body: JSON.stringify({ username, password }),
       });
+
+      const data = await response.text();
+
+      save("accessToken", data);
+      setAccessToken(data);
+      console.log(data);
+
+      AsyncStorage.setItem("username", username);
+
+      setUsernameData(username);
+
+      // redirect to MainScreen
+      if (username === "admin") {
+        router.replace("/home/selectFields/ChooseFieldsPage");
+      } else {
+        router.replace("/home/credential");
+      }
+    } catch (error) {
+      console.error(error);
+      Alert.alert(
+        "Login failed",
+        "Please check your username and password and try again.",
+      );
+    }
   };
 
   useEffect(() => {
-    if (code && state) {
-      console.log("getting token");
-      loginHandler({ username: "IR018349", password: "user" });
+    if (url) {
+      const { queryParams } = Linking.parse(url);
+      if (queryParams.code) {
+        loginHandler({ username: "IR018349", password: "user" });
+      }
     }
-  }, [code, state]); // Add 'code' and 'state' to the dependency array
+  }, [url]);
 
   return (
     <>
@@ -193,7 +175,7 @@ export default function SignIn() {
               />
             </View>
             <Button
-              onPress={iLoginHandler}
+              onPress={openIAmSmart}
               bg-green10
               className="w-[70%] my-1 sm:my-2"
             >
