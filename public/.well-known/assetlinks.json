@@ -1,0 +1,13 @@
+[
+    {
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.user9510.cvpworkerexporouterapp",
+        "sha256_cert_fingerprints": [
+          "84:F2:CA:C7:F5:D8:71:93:3A:B6:74:1D:F7:CD:53:B6:06:7F:99:17:DC:84:81:E4:67:ED:D2:71:0E:15:0A:17"
+        ]
+      }
+    }
+]
+  
