@@ -76,3 +76,6 @@ dist/
 
 # ignores all .env files
 .env*
+
+patches/
+eas.json
