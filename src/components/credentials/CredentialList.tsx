@@ -1,19 +1,15 @@
 import { useAtomValue } from "jotai";
-import { AntDesign } from "@expo/vector-icons";
-import { Text, View, Button } from "react-native-ui-lib";
+import { Text, View } from "react-native-ui-lib";
 import { SafeAreaView, Platform, UIManager } from "react-native";
 import { AccordionList } from "react-native-accordion-list-view";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import { DarkThemeAtom } from "~atoms/darkTheme";
 import CredentialListItem from "./CredentialListItem";
 import { itemProps } from "~functions/api/credential/getCredentialList";
 import { fontSizeAtom } from "~atoms/fontSize";
 
 type CrendentialListProps = {
-  // showLoadMoreButton: boolean;
-  // loadMoreData: () => void;
   credentials: [string, itemProps[]][];
 };
 
@@ -25,11 +21,7 @@ export type FilterFieldsProps =
   | Pick<fields, "Credential Type" | "Issuer">
   | { Valid: ["Valid", "Not Valid"] };
 
-const CrendentialList: React.FC<CrendentialListProps> = ({
-  // showLoadMoreButton,
-  // loadMoreData,
-  credentials,
-}) => {
+const CrendentialList: React.FC<CrendentialListProps> = ({ credentials }) => {
   const { t } = useTranslation();
 
   const fontSizeData = useAtomValue(fontSizeAtom);
@@ -41,33 +33,6 @@ const CrendentialList: React.FC<CrendentialListProps> = ({
       }
     }
   }, []);
-
-  const isDarkTheme = useAtomValue(DarkThemeAtom);
-
-  const renderFooter = () => {
-    const selectedCredentials = { selectedCredentials: [] };
-
-    return (
-      <View>
-        <Button
-          bg-textColor
-          label="Load More"
-          screenBG
-          iconOnRight
-          iconSource={() => (
-            <View className="ml-2">
-              <AntDesign
-                name="caretdown"
-                size={12}
-                color={`${isDarkTheme ? "black" : "white"}`}
-              />
-            </View>
-          )}
-          // onPress={loadMoreData}
-        ></Button>
-      </View>
-    );
-  };
 
   return (
     <SafeAreaView className="h-[85%]">
@@ -83,11 +48,11 @@ const CrendentialList: React.FC<CrendentialListProps> = ({
           }}
           data={credentials}
           customTitle={([issuer, _]: [string, any]) => (
-            <View className="">
+            <View>
               <Text
-                className={`text-${fontSizeData + 1}xl  py-4 pl-2  text-black`}
+                className={`text-${fontSizeData + 1}xl  py-4 pl-2 text-black`}
               >
-                {t(`${issuer}`)}
+                {t(issuer)}
               </Text>
             </View>
           )}

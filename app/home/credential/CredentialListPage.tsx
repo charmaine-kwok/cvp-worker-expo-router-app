@@ -22,7 +22,6 @@ const CrendentialListPage: React.FC = () => {
   const setCredentialAtom = useSetAtom(credentialsAtom);
 
   const [totalItem, setTotalItem] = useState<number | null>(null);
-  const [showLoadMoreButton, setShowLoadMoreButton] = useState<boolean>(false);
   const [groupedByIssuer, setGroupedByIssuer] =
     useState<Record<string, itemProps[]>>(null);
   const [expiredCredentials, setExpiredCredentials] = useState<
@@ -31,7 +30,7 @@ const CrendentialListPage: React.FC = () => {
 
   //pagination
   const [pageSize, setPageSize] = useState(20); // FIXME:hardcoded
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async (currentPage: number) => {
@@ -40,9 +39,6 @@ const CrendentialListPage: React.FC = () => {
       if (data) {
         console.log("data", data);
         setTotalItem(data.total_items);
-        setShowLoadMoreButton(
-          data.total_items - data.page_size * currentPage > 0,
-        );
         setPageSize(data.page_size);
         const fetchData = async (item: string, accessToken: string) => {
           try {
@@ -121,10 +117,6 @@ const CrendentialListPage: React.FC = () => {
     }
   }, [currentPage]);
 
-  const loadMoreData = () => {
-    setCurrentPage((prev) => prev + 1);
-  };
-
   if (groupedByIssuer !== null && totalItem !== null) {
     const sortedGroupedByIssuer = Object.entries(groupedByIssuer).sort(
       (a, b) => {
@@ -146,12 +138,6 @@ const CrendentialListPage: React.FC = () => {
     console.log(expiredCredentials);
 
     return (
-      // <CertList
-      //   data={certList}
-      //   totalItem={totalItem}
-      //   showLoadMoreButton={showLoadMoreButton}
-      //   loadMoreData={loadMoreData}
-      // />{}
       <View bg-greyish className="h-full">
         <CrendentialList credentials={sortedGroupedByIssuer} />
         {expiredCredentials.length > 0 && <ExpiredButton />}
