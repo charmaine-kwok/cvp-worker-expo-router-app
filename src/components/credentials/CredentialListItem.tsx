@@ -7,21 +7,15 @@ import { itemProps } from "~functions/api/credential/getCredentialList";
 
 type CredentialListItemProps = {
   item: itemProps;
-  borderPosition?: string;
 };
 
-const CredentialListItem: React.FC<CredentialListItemProps> = ({
-  item,
-  borderPosition = "t",
-}) => {
+const CredentialListItem: React.FC<CredentialListItemProps> = ({ item }) => {
   const { t } = useTranslation();
 
   const fontSizeData = useAtomValue(fontSizeAtom);
 
   return (
-    <View
-      className={`relative flex flex-row items-center border-${borderPosition} px-2 py-6`}
-    >
+    <View className={`relative flex flex-row items-center border-b px-2 py-6`}>
       <View className="flex flex-row justify-between mb-4 w-full">
         <View className="flex flex-col">
           <Text className={`text-${fontSizeData}xl text-black`}>

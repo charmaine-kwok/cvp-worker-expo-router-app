@@ -16,7 +16,7 @@ const ExpiredCredentialsList: React.FC = () => {
         data={expiredCredentialsData}
         renderItem={({ item }) => (
           <View>
-            <CredentialListItem item={item} borderPosition="b" />
+            <CredentialListItem item={item} />
           </View>
         )}
         keyExtractor={(item) => item.UUID}
