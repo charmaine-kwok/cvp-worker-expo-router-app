@@ -40,7 +40,10 @@
           "data": [
             {
               "scheme": "https",
-              "host": "cvp.demo.app"
+              "host": "myapp"
+            },
+            {
+              "scheme": "myapp"
             }
           ],
           "category": ["BROWSABLE", "DEFAULT"]
