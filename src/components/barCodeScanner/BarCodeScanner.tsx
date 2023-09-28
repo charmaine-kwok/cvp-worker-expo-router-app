@@ -156,10 +156,7 @@ export default function BarCodeScan() {
         <BarcodeMask width={width * 0.8} height={width * 0.8} />
       </BarCodeScanner>
       {scanned && (
-        <Button
-          title={`${t("TapToScanAgain")}`}
-          onPress={() => setScanned(false)}
-        />
+        <Button title={t("TapToScanAgain")} onPress={() => setScanned(false)} />
       )}
     </View>
   );

@@ -21,20 +21,20 @@ export default function Layout() {
       <Stack.Screen
         name="index"
         options={{
-          headerTitle: `${t("Settings")}`,
+          headerTitle: t("Settings"),
           statusBarColor: isDarkTheme ? "white" : "black",
         }}
       />
       <Stack.Screen
         name="language"
         options={{
-          headerTitle: `${t("Language")}`,
+          headerTitle: t("Language"),
         }}
       />
       <Stack.Screen
         name="theme"
         options={{
-          headerTitle: `${t("DarkMode")}`,
+          headerTitle: t("DarkMode"),
         }}
       />
       <Stack.Screen name="Settings" />

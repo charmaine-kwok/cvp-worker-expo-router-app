@@ -12,7 +12,7 @@ const GenerateQRCodeButton: React.FC<{ setIsVisible: any }> = ({
     <View className="flex items-center px-4">
       <CustomButton
         onPress={setIsVisible}
-        text={`${t("Generate QR code")}`}
+        text={t("Generate QR code")}
         flexDir="column"
         fgColor="#ffffff"
         bold={true}

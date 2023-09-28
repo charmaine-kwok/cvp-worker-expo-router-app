@@ -15,18 +15,18 @@ export default function Theme() {
   const { t } = useTranslation();
   const themeList: { theme: string; value: boolean; id: string }[] = [
     {
-      theme: `${t("LightMode")}`,
+      theme: t("LightMode"),
       value: false,
       id: "0",
     },
     {
-      theme: `${t("DarkMode")}`,
+      theme: t("DarkMode"),
       value: true,
       id: "1",
     },
   ];
 
-  const [darkTheme, setDarkTheme] = useState<boolean>(isDarkTheme ?? false);
+  const [, setDarkTheme] = useState<boolean>(isDarkTheme ?? false);
 
   return (
     <SortableList

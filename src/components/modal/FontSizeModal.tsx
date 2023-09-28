@@ -43,7 +43,7 @@ export const FontSizeModal: React.FC<FontSizeModalProps> = (props) => {
         <View bg-screenBG className="rounded-xl">
           <Modal.Header>
             <Text textColor center className="text-xl">
-              {`${t("AdjustFontSize")}`}
+              {t("AdjustFontSize")}
             </Text>
           </Modal.Header>
           <Modal.Body>
@@ -95,7 +95,7 @@ export const FontSizeModal: React.FC<FontSizeModalProps> = (props) => {
 
               <View className="h-[60px]">
                 <Text textColor className={`text-${tempFontSize + 1}xl`}>
-                  {`${t("SampleText")}`}
+                  {t("SampleText")}
                 </Text>
               </View>
             </View>

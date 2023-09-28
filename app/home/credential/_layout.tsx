@@ -21,14 +21,14 @@ export default function Layout() {
     >
       <Stack.Screen
         name="index"
-        options={{ headerTitle: `${t("My Credentials")}` }}
+        options={{ headerTitle: t("My Credentials") }}
       />
       <Stack.Screen name="CredentialListPage" />
       <Stack.Screen
         name="ExpiredCredentials"
         options={{
           // href: null,
-          headerTitle: `${t("Expired Credentials")}`,
+          headerTitle: t("Expired Credentials"),
         }}
       />
     </Stack>
