@@ -22,5 +22,7 @@ Then press `a` for Android, `i` for iOS
 
 ## Demo Video
 
-https://github.com/charmaine-kwok/cvp-worker-expo-router-app/assets/69842891/96a07a6d-86ce-4fe9-9d69-9f1f5b8b656c
+https://github.com/charmaine-kwok/cvp-worker-expo-router-app/assets/69842891/797deb7b-244e-4601-bb6f-89d80411137c
+
+
 
